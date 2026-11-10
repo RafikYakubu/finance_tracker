@@ -17,8 +17,7 @@ const Sidebar = () => {
       </div>
 
       <nav className="sidebar-nav">
-        <p className="nav-label">MENU</p>
-
+        
         <a href="#" className="nav-link active">
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
