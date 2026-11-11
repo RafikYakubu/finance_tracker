@@ -65,7 +65,7 @@ button {
   gap: 13px;
   padding: 13px 12px;
   margin-bottom: 7px;
-  border-radius: 9px;
+  border-radius: 0;
   text-decoration: none;
   color: #64748b;
   font-size: 14px;
@@ -75,8 +75,8 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-  background: #e6f4f1;
-  color: #0f766e;
+  background: #d2d6db;
+  color: #64748b;
 }
 
 .settings-label {
@@ -206,7 +206,7 @@ button {
 .summary-card {
   background: white;
   border: 1px solid #e8edf3;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 24px;
 }
 
