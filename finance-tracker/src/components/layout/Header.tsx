@@ -1,11 +1,13 @@
 import { Search, Bell, Plus } from "lucide-react";
+import { useTransactionForm } from "../../context/TransactionFormContext";
 
-const Header = () => {
+function Header() {
+  const { openForm } = useTransactionForm();
+
   return (
     <header className="header">
       <div className="header-title">
         <h1>Dashboard</h1>
-        
       </div>
 
       <div className="header-actions">
@@ -18,13 +20,16 @@ const Header = () => {
           <Bell size={20} />
         </button>
 
-        <button className="add-transaction-button">
+        <button
+          className="add-transaction-button"
+          onClick={openForm}
+        >
           <Plus size={18} />
           <span>Add Transaction</span>
         </button>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

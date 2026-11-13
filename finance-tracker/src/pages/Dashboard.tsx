@@ -1,10 +1,7 @@
-import { useState } from "react";
-
 import {
   Wallet,
   TrendingUp,
   TrendingDown,
-  Plus,
 } from "lucide-react";
 
 import SummaryCard from "../components/dashboard/SummaryCard";
@@ -12,6 +9,7 @@ import RecentTransactions from "../components/dashboard/RecentTransactions";
 import TransactionForm from "../components/transactions/TransactionForm";
 
 import { useTransactions } from "../hooks/useTransactions";
+import { useTransactionForm } from "../context/TransactionFormContext";
 
 import {
   calculateBalance,
@@ -24,7 +22,7 @@ import { formatCurrency } from "../utils/formatCurrency";
 function Dashboard() {
   const { transactions, addTransaction } = useTransactions();
 
-  const [showForm, setShowForm] = useState(false);
+  const { showForm, closeForm } = useTransactionForm();
 
   const balance = calculateBalance(transactions);
   const income = calculateTotalIncome(transactions);
@@ -32,25 +30,11 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-heading">
-        <div>
-          <h1>Dashboard</h1>
-          <p>Here's an overview of your finances.</p>
-        </div>
-
-        <button
-          className="add-transaction-button"
-          onClick={() => setShowForm(true)}
-        >
-          <Plus size={18} />
-          Add Transaction
-        </button>
-      </div>
 
       {showForm && (
         <TransactionForm
           onAdd={addTransaction}
-          onCancel={() => setShowForm(false)}
+          onCancel={closeForm}
         />
       )}
 
@@ -81,6 +65,7 @@ function Dashboard() {
       </div>
 
       <RecentTransactions transactions={transactions} />
+
     </div>
   );
 }
