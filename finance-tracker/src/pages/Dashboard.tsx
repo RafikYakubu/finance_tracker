@@ -8,8 +8,9 @@ import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransactions from "../components/dashboard/RecentTransactions";
 import TransactionForm from "../components/transactions/TransactionForm";
 
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import { useTransactionForm } from "../context/TransactionFormContext";
+
 
 import {
   calculateBalance,
