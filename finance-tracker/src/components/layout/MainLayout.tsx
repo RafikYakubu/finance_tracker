@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 import Sidebar from "./Sidebar";
-import Header from "./Header";
 
 import { TransactionFormContext } from "../../context/TransactionFormContext";
 
@@ -25,8 +24,6 @@ function MainLayout({ children }: MainLayoutProps) {
         <Sidebar />
 
         <main className="main-content">
-          <Header />
-
           <div className="page-content">
             {children}
           </div>

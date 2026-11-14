@@ -6,39 +6,34 @@ import {
   Wallet,
 } from "lucide-react";
 
-const Sidebar = () => {
+function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-icon">
-          <Wallet size={24} />
-        </div>
+        <Wallet size={24} />
         <h2>FinTrack</h2>
       </div>
 
       <nav className="sidebar-nav">
-        
-        <a href="#" className="nav-link active">
+        <div className="nav-link">
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
-        </a>
+        </div>
 
-        <a href="#" className="nav-link">
+        <div className="nav-link">
           <ArrowLeftRight size={20} />
           <span>Transactions</span>
-        </a>
+        </div>
 
-        <a href="#" className="nav-link">
+        <div className="nav-link">
           <ChartNoAxesCombined size={20} />
           <span>Analytics</span>
-        </a>
+        </div>
 
-        <p className="nav-label settings-label">PREFERENCES</p>
-
-        <a href="#" className="nav-link">
+        <div className="nav-link">
           <Settings size={20} />
           <span>Settings</span>
-        </a>
+        </div>
       </nav>
 
       <div className="sidebar-footer">
@@ -47,6 +42,6 @@ const Sidebar = () => {
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;
