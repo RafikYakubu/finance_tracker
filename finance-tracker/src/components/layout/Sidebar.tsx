@@ -6,6 +6,8 @@ import {
   Wallet,
 } from "lucide-react";
 
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
   return (
     <aside className="sidebar">
@@ -15,25 +17,25 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        <div className="nav-link">
+        <NavLink to="/" className="nav-link">
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
-        </div>
+        </NavLink>
 
-        <div className="nav-link">
+        <NavLink to="/transactions" className="nav-link">
           <ArrowLeftRight size={20} />
           <span>Transactions</span>
-        </div>
+        </NavLink>
 
-        <div className="nav-link">
+        <NavLink to="/analytics" className="nav-link">
           <ChartNoAxesCombined size={20} />
           <span>Analytics</span>
-        </div>
+        </NavLink>
 
-        <div className="nav-link">
+        <NavLink to="/settings" className="nav-link">
           <Settings size={20} />
           <span>Settings</span>
-        </div>
+        </NavLink>
       </nav>
 
       <div className="sidebar-footer">
