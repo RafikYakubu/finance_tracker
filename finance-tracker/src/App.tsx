@@ -4,6 +4,7 @@ import MainLayout from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
 
 import { TransactionsProvider } from "./context/TransactionsContext";
 
@@ -38,6 +39,15 @@ function App() {
               </MainLayout>
             }
           />
+
+          <Route
+  path="/settings"
+  element={
+    <MainLayout>
+      <Settings />
+    </MainLayout>
+  }
+/>
         </Routes>
       </TransactionsProvider>
     </BrowserRouter>
