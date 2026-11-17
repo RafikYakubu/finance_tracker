@@ -7,10 +7,8 @@ import {
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransactions from "../components/dashboard/RecentTransactions";
 
-
 import { useTransactions } from "../context/TransactionsContext";
-
-
+import { useSettings } from "../context/SettingsContext";
 
 import {
   calculateBalance,
@@ -22,8 +20,7 @@ import { formatCurrency } from "../utils/formatCurrency";
 
 function Dashboard() {
   const { transactions } = useTransactions();
-
-  
+  const { currency } = useSettings();
 
   const balance = calculateBalance(transactions);
   const income = calculateTotalIncome(transactions);
@@ -31,13 +28,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-
-     
-
       <div className="summary-grid">
         <SummaryCard
           title="Total Balance"
-          amount={formatCurrency(balance)}
+          amount={formatCurrency(balance, currency)}
           icon={Wallet}
           description="Your available balance"
           variant="balance"
@@ -45,7 +39,7 @@ function Dashboard() {
 
         <SummaryCard
           title="Total Income"
-          amount={formatCurrency(income)}
+          amount={formatCurrency(income, currency)}
           icon={TrendingUp}
           description="Money coming in"
           variant="income"
@@ -53,7 +47,7 @@ function Dashboard() {
 
         <SummaryCard
           title="Total Expenses"
-          amount={formatCurrency(expenses)}
+          amount={formatCurrency(expenses, currency)}
           icon={TrendingDown}
           description="Money going out"
           variant="expense"
@@ -61,7 +55,6 @@ function Dashboard() {
       </div>
 
       <RecentTransactions transactions={transactions} />
-
     </div>
   );
 }

@@ -5,12 +5,14 @@ import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
+import { SettingsProvider } from "./context/SettingsContext";
 
 import { TransactionsProvider } from "./context/TransactionsContext";
 
 function App() {
   return (
     <BrowserRouter>
+      <SettingsProvider>
       <TransactionsProvider>
         <Routes>
           <Route
@@ -40,6 +42,8 @@ function App() {
             }
           />
 
+
+
           <Route
   path="/settings"
   element={
@@ -50,8 +54,10 @@ function App() {
 />
         </Routes>
       </TransactionsProvider>
+      </SettingsProvider>
     </BrowserRouter>
   );
 }
+    
 
 export default App;
