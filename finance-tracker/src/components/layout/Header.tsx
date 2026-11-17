@@ -1,19 +1,33 @@
 import { Search, Bell, Plus } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { useTransactionForm } from "../../context/TransactionFormContext";
 
 function Header() {
   const { openForm } = useTransactionForm();
+  const location = useLocation();
+
+  const pageTitles: Record<string, string> = {
+    "/": "Dashboard",
+    "/transactions": "Transactions",
+    "/analytics": "Analytics",
+    "/settings": "Settings",
+  };
+
+  const pageTitle = pageTitles[location.pathname] || "FinTrack";
 
   return (
     <header className="header">
       <div className="header-title">
-        <h1>Dashboard</h1>
+        <h1>{pageTitle}</h1>
       </div>
 
       <div className="header-actions">
         <div className="search-box">
           <Search size={18} />
-          <input type="text" placeholder="Search transactions..." />
+          <input
+            type="text"
+            placeholder="Search transactions..."
+          />
         </div>
 
         <button className="notification-button">

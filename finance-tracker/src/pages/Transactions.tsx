@@ -1,14 +1,25 @@
 import { useState } from "react";
-import { Search,  Pencil, Trash2 } from "lucide-react";
+import { Search, Pencil, Trash2 } from "lucide-react";
 
 import { useTransactions } from "../context/TransactionsContext";
 import { formatCurrency } from "../utils/formatCurrency";
+import TransactionForm from "../components/transactions/TransactionForm";
+
+import type { Transaction } from "../types/transaction";
+
+type NewTransaction = Omit<Transaction, "id">;
 
 function Transactions() {
-  const { transactions, deleteTransaction } = useTransactions();
+  const {
+    transactions,
+    updateTransaction,
+    deleteTransaction,
+  } = useTransactions();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [editingTransaction, setEditingTransaction] =
+    useState<Transaction | null>(null);
 
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesSearch =
@@ -21,6 +32,13 @@ function Transactions() {
     return matchesSearch && matchesFilter;
   });
 
+  const handleUpdate = (updatedData: NewTransaction) => {
+    if (!editingTransaction) return;
+
+    updateTransaction(editingTransaction.id, updatedData);
+    setEditingTransaction(null);
+  };
+
   return (
     <div className="transactions-page">
       <div className="page-heading">
@@ -29,6 +47,16 @@ function Transactions() {
           <p>Manage and track all your financial activities.</p>
         </div>
       </div>
+
+      {editingTransaction && (
+        <TransactionForm
+          key={editingTransaction.id}
+          initialData={editingTransaction}
+          onAdd={() => {}}
+          onUpdate={handleUpdate}
+          onCancel={() => setEditingTransaction(null)}
+        />
+      )}
 
       <div className="transaction-toolbar">
         <div className="search-box">
@@ -69,7 +97,11 @@ function Transactions() {
               filteredTransactions.map((transaction) => (
                 <tr key={transaction.id}>
                   <td>{transaction.title}</td>
-                  <td>{transaction.category}</td>
+                  <td>
+  <span className="category-badge">
+    {transaction.category}
+  </span>
+</td>
                   <td>{transaction.date}</td>
                   <td>
                     <span className={`transaction-badge ${transaction.type}`}>
@@ -77,17 +109,17 @@ function Transactions() {
                     </span>
                   </td>
                   <td>
-                    <strong>
-                      {transaction.type === "income" ? "+" : "-"}
-                      {formatCurrency(transaction.amount)}
-                    </strong>
+                    <strong className={`transaction-amount ${transaction.type}`}>
+  {transaction.type === "income" ? "+" : "-"}
+  {formatCurrency(transaction.amount)}
+</strong>
                   </td>
                   <td>
                     <div className="transaction-actions">
                       <button
                         className="edit-button"
                         title="Edit transaction"
-                        disabled
+                        onClick={() => setEditingTransaction(transaction)}
                       >
                         <Pencil size={17} />
                       </button>

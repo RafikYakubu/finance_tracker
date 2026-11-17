@@ -6,18 +6,33 @@ type NewTransaction = Omit<Transaction, "id">;
 
 interface TransactionFormProps {
   onAdd: (transaction: NewTransaction) => void;
+  onUpdate?: (transaction: NewTransaction) => void;
   onCancel: () => void;
+  initialData?: Transaction | null;
 }
 
-function TransactionForm({ onAdd, onCancel }: TransactionFormProps) {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [type, setType] = useState<"income" | "expense">("expense");
-  const [category, setCategory] = useState("Food");
+function TransactionForm({
+  onAdd,
+  onUpdate,
+  onCancel,
+  initialData,
+}: TransactionFormProps) {
+  const [title, setTitle] = useState(initialData?.title ?? "");
+  const [amount, setAmount] = useState(
+    initialData ? String(initialData.amount) : ""
+  );
+  const [type, setType] = useState<"income" | "expense">(
+    initialData?.type ?? "expense"
+  );
+  const [category, setCategory] = useState(
+    initialData?.category ?? "Food"
+  );
   const [date, setDate] = useState(
-    new Date().toISOString().split("T")[0]
+    initialData?.date ?? new Date().toISOString().split("T")[0]
   );
   const [error, setError] = useState("");
+
+  const isEditing = Boolean(initialData);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,20 +54,20 @@ function TransactionForm({ onAdd, onCancel }: TransactionFormProps) {
       return;
     }
 
-    onAdd({
+    const transactionData: NewTransaction = {
       title: title.trim(),
       amount: numericAmount,
       type,
       category,
       date,
-    });
+    };
 
-    setTitle("");
-    setAmount("");
-    setType("expense");
-    setCategory("Food");
-    setDate(new Date().toISOString().split("T")[0]);
-    setError("");
+    if (isEditing && onUpdate) {
+      onUpdate(transactionData);
+    } else {
+      onAdd(transactionData);
+    }
+
     onCancel();
   };
 
@@ -60,8 +75,12 @@ function TransactionForm({ onAdd, onCancel }: TransactionFormProps) {
     <form className="transaction-form" onSubmit={handleSubmit}>
       <div className="form-heading">
         <div>
-          <h2>Add Transaction</h2>
-          <p>Record your income or expenses.</p>
+          <h2>{isEditing ? "Edit Transaction" : "Add Transaction"}</h2>
+          <p>
+            {isEditing
+              ? "Update your transaction details."
+              : "Record your income or expenses."}
+          </p>
         </div>
 
         <button type="button" onClick={onCancel}>
@@ -147,7 +166,7 @@ function TransactionForm({ onAdd, onCancel }: TransactionFormProps) {
         </button>
 
         <button type="submit" className="submit-button">
-          Add Transaction
+          {isEditing ? "Update Transaction" : "Add Transaction"}
         </button>
       </div>
     </form>

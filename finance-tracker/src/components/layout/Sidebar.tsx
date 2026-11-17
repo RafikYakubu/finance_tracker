@@ -8,31 +8,36 @@ import {
 
 import { NavLink } from "react-router-dom";
 
-function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? "sidebar-open" : ""}`}>
       <div className="sidebar-logo">
         <Wallet size={24} />
         <h2>FinTrack</h2>
       </div>
 
       <nav className="sidebar-nav">
-        <NavLink to="/" className="nav-link">
+        <NavLink to="/" className="nav-link" onClick={onClose}>
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
         </NavLink>
 
-        <NavLink to="/transactions" className="nav-link">
+        <NavLink to="/transactions" className="nav-link" onClick={onClose}>
           <ArrowLeftRight size={20} />
           <span>Transactions</span>
         </NavLink>
 
-        <NavLink to="/analytics" className="nav-link">
+        <NavLink to="/analytics" className="nav-link" onClick={onClose}>
           <ChartNoAxesCombined size={20} />
           <span>Analytics</span>
         </NavLink>
 
-        <NavLink to="/settings" className="nav-link">
+        <NavLink to="/settings" className="nav-link" onClick={onClose}>
           <Settings size={20} />
           <span>Settings</span>
         </NavLink>

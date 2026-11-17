@@ -6,10 +6,10 @@ import {
 
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransactions from "../components/dashboard/RecentTransactions";
-import TransactionForm from "../components/transactions/TransactionForm";
+
 
 import { useTransactions } from "../context/TransactionsContext";
-import { useTransactionForm } from "../context/TransactionFormContext";
+
 
 
 import {
@@ -21,9 +21,9 @@ import {
 import { formatCurrency } from "../utils/formatCurrency";
 
 function Dashboard() {
-  const { transactions, addTransaction } = useTransactions();
+  const { transactions } = useTransactions();
 
-  const { showForm, closeForm } = useTransactionForm();
+  
 
   const balance = calculateBalance(transactions);
   const income = calculateTotalIncome(transactions);
@@ -32,12 +32,7 @@ function Dashboard() {
   return (
     <div className="dashboard">
 
-      {showForm && (
-        <TransactionForm
-          onAdd={addTransaction}
-          onCancel={closeForm}
-        />
-      )}
+     
 
       <div className="summary-grid">
         <SummaryCard
