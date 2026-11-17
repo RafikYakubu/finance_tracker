@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import type { Transaction } from "../../types/transaction";
+
 import { formatCurrency } from "../../utils/formatCurrency";
+import { useSettings } from "../../context/SettingsContext";
 
 interface RecentTransactionsProps {
   transactions: Transaction[];
@@ -9,6 +11,8 @@ interface RecentTransactionsProps {
 function RecentTransactions({
   transactions,
 }: RecentTransactionsProps) {
+  const { currency } = useSettings();
+
   const recentTransactions = transactions.slice(0, 5);
 
   return (
@@ -45,7 +49,7 @@ function RecentTransactions({
                 className={`recent-transaction-amount ${transaction.type}`}
               >
                 {transaction.type === "income" ? "+" : "-"}
-                {formatCurrency(transaction.amount)}
+                {formatCurrency(transaction.amount, currency)}
               </span>
             </div>
           ))

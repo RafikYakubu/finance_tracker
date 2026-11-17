@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search, Pencil, Trash2 } from "lucide-react";
-
+import { useSettings } from "../context/SettingsContext";
 import { useTransactions } from "../context/TransactionsContext";
 import { formatCurrency } from "../utils/formatCurrency";
 import TransactionForm from "../components/transactions/TransactionForm";
@@ -16,6 +16,7 @@ function Transactions() {
     deleteTransaction,
   } = useTransactions();
 
+  const { currency } = useSettings();
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const [editingTransaction, setEditingTransaction] =
@@ -111,7 +112,7 @@ function Transactions() {
                   <td>
                     <strong className={`transaction-amount ${transaction.type}`}>
   {transaction.type === "income" ? "+" : "-"}
-  {formatCurrency(transaction.amount)}
+  {formatCurrency(transaction.amount, currency)}
 </strong>
                   </td>
                   <td>

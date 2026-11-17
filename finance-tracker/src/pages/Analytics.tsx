@@ -14,7 +14,7 @@ import {
   Line,
 } from "recharts";
 
-
+import { useSettings } from "../context/SettingsContext";
 import { useTransactions } from "../context/TransactionsContext";
 
 import {
@@ -28,7 +28,7 @@ import { formatCurrency } from "../utils/formatCurrency";
 
 function Analytics() {
   const { transactions } = useTransactions();
-
+    const { currency } = useSettings();
   const income = calculateTotalIncome(transactions);
   const expenses = calculateTotalExpenses(transactions);
   const balance = calculateBalance(transactions);
@@ -119,17 +119,17 @@ function Analytics() {
       <div className="analytics-summary-grid">
         <div className="analytics-summary-card">
           <span>Total Income</span>
-          <h3>{formatCurrency(income)}</h3>
+          <h3>{formatCurrency(income, currency)}</h3>
         </div>
 
         <div className="analytics-summary-card">
           <span>Total Expenses</span>
-          <h3>{formatCurrency(expenses)}</h3>
+          <h3>{formatCurrency(expenses, currency)}</h3>
         </div>
 
         <div className="analytics-summary-card">
           <span>Net Balance</span>
-          <h3>{formatCurrency(balance)}</h3>
+          <h3>{formatCurrency(balance, currency)}</h3>
         </div>
       </div>
 
@@ -150,7 +150,9 @@ function Analytics() {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip
-  formatter={(value) => formatCurrency(Number(value ?? 0))}
+  formatter={(value) =>
+    formatCurrency(Number(value ?? 0), currency)
+  }
 />
                 <Legend />
                 <Bar
@@ -190,7 +192,9 @@ function Analytics() {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip
-  formatter={(value) => formatCurrency(Number(value ?? 0))}
+  formatter={(value) =>
+    formatCurrency(Number(value ?? 0), currency)
+  }
 />
                 <Legend />
                 <Line
@@ -245,7 +249,9 @@ function Analytics() {
                   ))}
                 </Pie>
                 <Tooltip
-  formatter={(value) => formatCurrency(Number(value ?? 0))}
+  formatter={(value) =>
+    formatCurrency(Number(value ?? 0), currency)
+  }
 />
                 <Legend />
               </PieChart>
