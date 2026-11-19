@@ -2,11 +2,16 @@ import {
   Palette,
   Database,
   Globe,
+  Download,
 } from "lucide-react";
+
 import { useSettings } from "../context/SettingsContext";
+import { useTransactions } from "../context/TransactionsContext";
+
+
 function Settings() {
 
-    const {
+  const {
   currency,
   setCurrency,
   dateFormat,
@@ -14,6 +19,59 @@ function Settings() {
   theme,
   setTheme,
 } = useSettings();
+
+  const { transactions } = useTransactions();
+  const exportTransactions = () => {
+  const headers = [
+    "ID",
+    "Title",
+    "Amount",
+    "Type",
+    "Category",
+    "Date",
+  ];
+
+  const rows = transactions.map((transaction) => [
+    transaction.id,
+    transaction.title,
+    transaction.amount,
+    transaction.type,
+    transaction.category,
+    transaction.date,
+  ]);
+
+  const escapeCSV = (value: string | number) => {
+    let text = String(value);
+
+    // Prevent spreadsheet formula injection in text fields.
+    if (/^[\s]*[=+\-@]/.test(text)) {
+      text = `'${text}`;
+    }
+
+    return `"${text.replace(/"/g, '""')}"`;
+  };
+
+  const csvContent = [
+    headers.map(escapeCSV).join(","),
+    ...rows.map((row) => row.map(escapeCSV).join(",")),
+  ].join("\n");
+
+  const blob = new Blob(["\uFEFF" + csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "fintrack-transactions.csv";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+};
 
   return (
     <div className="settings-page">
@@ -117,7 +175,14 @@ function Settings() {
             <p>Manage your locally stored financial information.</p>
           </div>
 
-          <span className="settings-status">Stored locally</span>
+          <button
+  className="settings-action-button"
+  onClick={exportTransactions}
+  disabled={transactions.length === 0}
+>
+  <Download size={16} />
+  Export CSV
+</button>
         </div>
       </section>
     </div>
