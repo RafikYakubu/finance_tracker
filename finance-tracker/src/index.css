@@ -1565,3 +1565,254 @@ button {
     width: 100%;
   }
 }
+
+/* =================================
+   FINTRACK DARK MODE
+================================= */
+
+html[data-theme="dark"] body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* SIDEBAR */
+
+html[data-theme="dark"] .sidebar {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .sidebar-logo h2,
+html[data-theme="dark"] .sidebar-footer p {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .nav-link {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .sidebar-footer {
+  border-color: #334155;
+}
+
+/* HEADER */
+
+html[data-theme="dark"] .header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .header-title h1 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .search-box,
+html[data-theme="dark"] .notification-button {
+  background: #0f172a;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .search-box input {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .notification-button {
+  color: #cbd5e1;
+}
+
+/* MAIN CONTENT */
+
+html[data-theme="dark"] .dashboard-heading h1,
+html[data-theme="dark"] .dashboard-heading h2,
+html[data-theme="dark"] .transactions-page .page-heading h2,
+html[data-theme="dark"] .settings-heading h2 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .dashboard-heading p,
+html[data-theme="dark"] .transactions-page .page-heading p {
+  color: #94a3b8;
+}
+
+/* DASHBOARD CARDS */
+
+html[data-theme="dark"] .summary-card:not(.balance) {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .summary-card:not(.balance) h2 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .summary-card-top > span {
+  color: #cbd5e1;
+}
+
+/* RECENT TRANSACTIONS */
+
+html[data-theme="dark"] .recent-transactions {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .section-heading h3,
+html[data-theme="dark"] .transaction-details h4 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .transaction-row {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .recent-empty-state p {
+  color: #cbd5e1;
+}
+
+/* TRANSACTION FORMS */
+
+html[data-theme="dark"] .transaction-form {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .form-heading h2,
+html[data-theme="dark"] .form-group label {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .form-heading button {
+  color: #cbd5e1;
+}
+
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group select {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .cancel-button {
+  background: #334155;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+/* TRANSACTIONS PAGE */
+
+html[data-theme="dark"] .transaction-toolbar,
+html[data-theme="dark"] .transactions-table-container {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .transaction-toolbar .search-box,
+html[data-theme="dark"] .transaction-toolbar select {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .transaction-toolbar .search-box input {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .transactions-table thead {
+  background: #0f172a;
+}
+
+html[data-theme="dark"] .transactions-table th {
+  color: #94a3b8;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .transactions-table td {
+  color: #cbd5e1;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .transactions-table tbody tr:hover {
+  background: #263449;
+}
+
+html[data-theme="dark"] .category-badge {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+/* ANALYTICS */
+
+html[data-theme="dark"] .analytics-summary-card,
+html[data-theme="dark"] .analytics-chart-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .analytics-summary-card h3,
+html[data-theme="dark"] .analytics-card-heading h3 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .analytics-summary-card span {
+  color: #94a3b8;
+}
+
+/* SETTINGS */
+
+html[data-theme="dark"] .settings-section {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .settings-section-heading h3,
+html[data-theme="dark"] .settings-option h4 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .settings-section-heading {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .settings-option {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .settings-option select {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+/* MOBILE MENU */
+
+html[data-theme="dark"] .mobile-menu-button {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+/* SMOOTH THEME TRANSITION */
+
+body,
+.sidebar,
+.header,
+.summary-card,
+.recent-transactions,
+.transaction-toolbar,
+.transactions-table-container,
+.analytics-summary-card,
+.analytics-chart-card,
+.settings-section,
+.transaction-form {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
