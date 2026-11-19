@@ -5,12 +5,16 @@ import {
 } from "lucide-react";
 import { useSettings } from "../context/SettingsContext";
 function Settings() {
+
     const {
   currency,
   setCurrency,
   dateFormat,
   setDateFormat,
+  theme,
+  setTheme,
 } = useSettings();
+
   return (
     <div className="settings-page">
       <div className="settings-heading">
@@ -65,7 +69,7 @@ function Settings() {
   <option value="MM/DD/YYYY">MM/DD/YYYY</option>
   <option value="YYYY-MM-DD">YYYY-MM-DD</option>
 </select>
-  
+
         </div>
       </section>
 
@@ -85,10 +89,15 @@ function Settings() {
             <p>Choose your preferred application theme.</p>
           </div>
 
-          <select defaultValue="light">
-            <option value="light">Light Mode</option>
-            <option value="dark">Dark Mode</option>
-          </select>
+          <select
+  value={theme}
+  onChange={(e) =>
+    setTheme(e.target.value as "light" | "dark")
+  }
+>
+  <option value="light">Light Mode</option>
+  <option value="dark">Dark Mode</option>
+</select>
         </div>
       </section>
 
