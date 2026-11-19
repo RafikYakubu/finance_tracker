@@ -1,5 +1,4 @@
 import {
-  Settings as SettingsIcon,
   Palette,
   Database,
   Globe,
