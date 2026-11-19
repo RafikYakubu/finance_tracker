@@ -1816,3 +1816,79 @@ body,
     color 0.25s ease,
     border-color 0.25s ease;
 }
+
+/* =================================
+   SETTINGS DATA MANAGEMENT BUTTONS
+================================= */
+
+.settings-action-button,
+.settings-danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* EXPORT AND RESTORE */
+
+.settings-action-button {
+  background: #0f766e;
+  color: #ffffff;
+  border: 1px solid #0f766e;
+}
+
+.settings-action-button:hover:not(:disabled) {
+  background: #115e59;
+  border-color: #115e59;
+  transform: translateY(-2px);
+}
+
+/* CLEAR DATA */
+
+.settings-danger-button {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.settings-danger-button:hover:not(:disabled) {
+  background: #fee2e2;
+  transform: translateY(-2px);
+}
+
+/* DISABLED BUTTONS */
+
+.settings-action-button:disabled,
+.settings-danger-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* DARK MODE BUTTONS */
+
+html[data-theme="dark"] .settings-danger-button {
+  background: #7f1d1d;
+  color: #fca5a5;
+  border: none;
+}
+
+html[data-theme="dark"] .settings-danger-button:hover:not(:disabled) {
+  background: #7f1d1d;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .settings-action-button,
+  .settings-danger-button {
+    width: 100%;
+  }
+}
