@@ -5,7 +5,12 @@ import {
 } from "lucide-react";
 import { useSettings } from "../context/SettingsContext";
 function Settings() {
-    const { currency, setCurrency } = useSettings();
+    const {
+  currency,
+  setCurrency,
+  dateFormat,
+  setDateFormat,
+} = useSettings();
   return (
     <div className="settings-page">
       <div className="settings-heading">
@@ -48,11 +53,19 @@ function Settings() {
             <p>Choose how dates appear throughout the application.</p>
           </div>
 
-          <select defaultValue="DD/MM/YYYY">
-            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
-            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
-            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
-          </select>
+        <select
+  value={dateFormat}
+  onChange={(e) =>
+    setDateFormat(
+      e.target.value as "DD/MM/YYYY" | "MM/DD/YYYY" | "YYYY-MM-DD"
+    )
+  }
+>
+  <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+  <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+  <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+</select>
+  
         </div>
       </section>
 

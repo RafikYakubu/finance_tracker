@@ -3,6 +3,7 @@ import { Search, Pencil, Trash2 } from "lucide-react";
 import { useSettings } from "../context/SettingsContext";
 import { useTransactions } from "../context/TransactionsContext";
 import { formatCurrency } from "../utils/formatCurrency";
+import { formatDate } from "../utils/formatDate";
 import TransactionForm from "../components/transactions/TransactionForm";
 
 import type { Transaction } from "../types/transaction";
@@ -16,7 +17,7 @@ function Transactions() {
     deleteTransaction,
   } = useTransactions();
 
-  const { currency } = useSettings();
+  const { currency, dateFormat } = useSettings();
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const [editingTransaction, setEditingTransaction] =
@@ -103,7 +104,7 @@ function Transactions() {
     {transaction.category}
   </span>
 </td>
-                  <td>{transaction.date}</td>
+                  <td>{formatDate(transaction.date, dateFormat)}</td>
                   <td>
                     <span className={`transaction-badge ${transaction.type}`}>
                       {transaction.type}

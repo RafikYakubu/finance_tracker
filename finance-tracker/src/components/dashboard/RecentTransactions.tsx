@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Transaction } from "../../types/transaction";
-
+import { formatDate } from "../../utils/formatDate";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useSettings } from "../../context/SettingsContext";
 
@@ -11,7 +11,7 @@ interface RecentTransactionsProps {
 function RecentTransactions({
   transactions,
 }: RecentTransactionsProps) {
-  const { currency } = useSettings();
+  const { currency, dateFormat } = useSettings();
 
   const recentTransactions = transactions.slice(0, 5);
 
@@ -40,7 +40,7 @@ function RecentTransactions({
                 <div className="transaction-details">
                   <h4>{transaction.title}</h4>
                   <span>
-                    {transaction.category} · {transaction.date}
+                    {transaction.category} · {formatDate(transaction.date, dateFormat)}
                   </span>
                 </div>
               </div>
