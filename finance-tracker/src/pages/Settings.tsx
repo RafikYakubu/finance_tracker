@@ -3,6 +3,8 @@ import {
   Database,
   Globe,
   Download,
+  Trash2,
+  RotateCcw,
 } from "lucide-react";
 
 import { useSettings } from "../context/SettingsContext";
@@ -20,7 +22,11 @@ function Settings() {
   setTheme,
 } = useSettings();
 
-  const { transactions } = useTransactions();
+ const {
+  transactions,
+  clearTransactions,
+  restoreTransactions,  
+} = useTransactions();
   const exportTransactions = () => {
   const headers = [
     "ID",
@@ -35,7 +41,7 @@ function Settings() {
     transaction.id,
     transaction.title,
     transaction.amount,
-    transaction.type,
+    transaction.type, 
     transaction.category,
     transaction.date,
   ]);
@@ -71,6 +77,26 @@ function Settings() {
   document.body.removeChild(link);
 
   URL.revokeObjectURL(url);
+};
+
+const handleClearTransactions = () => {
+  const confirmed = window.confirm(
+    "Are you sure you want to delete all transactions? This action cannot be undone."
+  );
+
+  if (confirmed) {
+    clearTransactions();
+  }
+};
+
+const handleRestoreTransactions = () => {
+  const confirmed = window.confirm(
+    "Are you sure you want to restore the original demo transactions? Your current transactions will be replaced."
+  );
+
+  if (confirmed) {
+    restoreTransactions();
+  }
 };
 
   return (
@@ -169,21 +195,67 @@ function Settings() {
           </div>
         </div>
 
-        <div className="settings-option">
-          <div>
-            <h4>Application Data</h4>
-            <p>Manage your locally stored financial information.</p>
-          </div>
+        {/* APPLICATION DATA */}
+<div className="settings-option">
+  <div>
+    <h4>Application Data</h4>
+    <p>Manage your locally stored financial information.</p>
+    <p>{transactions.length} transaction(s) currently stored.</p>
+  </div>
 
-          <button
-  className="settings-action-button"
-  onClick={exportTransactions}
-  disabled={transactions.length === 0}
->
-  <Download size={16} />
-  Export CSV
-</button>
-        </div>
+  <span className="settings-status">Stored locally</span>
+</div>
+
+{/* EXPORT */}
+<div className="settings-option">
+  <div>
+    <h4>Export Transactions</h4>
+    <p>Download your financial records as a CSV file.</p>
+  </div>
+
+  <button
+    className="settings-action-button"
+    onClick={exportTransactions}
+    disabled={transactions.length === 0}
+  >
+    <Download size={16} />
+    Export CSV
+  </button>
+</div>
+
+{/* CLEAR DATA */}
+<div className="settings-option">
+  <div>
+    <h4>Clear All Transactions</h4>
+    <p>Remove all currently stored transactions.</p>
+  </div>
+
+  <button
+    className="settings-danger-button"
+    onClick={handleClearTransactions}
+    disabled={transactions.length === 0}
+  >
+    <Trash2 size={16} />
+    Clear Data
+  </button>
+</div>
+
+
+<div className="settings-option">
+  <div>
+    <h4>Restore Demo Data</h4>
+    <p>Replace your current records with the original sample transactions.</p>
+  </div>
+
+  <button
+    className="settings-action-button"
+    onClick={handleRestoreTransactions}
+  >
+    <RotateCcw size={16} />
+    Restore Data
+  </button>
+</div>
+
       </section>
     </div>
   );

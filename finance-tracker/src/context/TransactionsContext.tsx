@@ -18,6 +18,8 @@ interface TransactionsContextType {
   addTransaction: (transaction: NewTransaction) => void;
   updateTransaction: (id: string, transaction: NewTransaction) => void;
   deleteTransaction: (id: string) => void;
+  clearTransactions: () => void;
+  restoreTransactions: () => void;
 }
 
 const TransactionsContext =
@@ -87,14 +89,24 @@ export function TransactionsProvider({
     );
   };
 
+  const clearTransactions = () => {
+  setTransactions([]);
+};
+
+const restoreTransactions = () => {
+  setTransactions(initialTransactions);
+};
+
   return (
     <TransactionsContext.Provider
-      value={{
-        transactions,
-        addTransaction,
-        updateTransaction,
-        deleteTransaction,
-      }}
+     value={{
+  transactions,
+  addTransaction,
+  updateTransaction,
+  deleteTransaction,
+  clearTransactions,
+  restoreTransactions,
+}}
     >
       {children}
     </TransactionsContext.Provider>
