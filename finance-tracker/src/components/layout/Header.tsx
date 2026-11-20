@@ -6,19 +6,15 @@ function Header() {
   const { openForm } = useTransactionForm();
   const location = useLocation();
 
-  const pageTitles: Record<string, string> = {
-    "/": "Dashboard",
-    "/transactions": "Transactions",
-    "/analytics": "Analytics",
-    "/settings": "Settings",
-  };
-
-  const pageTitle = pageTitles[location.pathname] || "FinTrack";
+  // Only display the header on the Dashboard
+  if (location.pathname !== "/") {
+    return null;
+  }
 
   return (
     <header className="header">
       <div className="header-title">
-        <h1>{pageTitle}</h1>
+        <h1>Dashboard</h1>
       </div>
 
       <div className="header-actions">
